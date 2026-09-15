@@ -35,7 +35,7 @@ def get_events():
 @app.route("/events", methods=["POST"])
 def create_event():
     """Create a new event from JSON input."""
-    data = request.get_json()
+    data = request.get_json(silent=True)
 
     # Validate that JSON data and the title are provided.
     if not data or "title" not in data:
@@ -54,7 +54,7 @@ def create_event():
 @app.route("/events/<int:event_id>", methods=["PATCH"])
 def update_event(event_id):
     """Update the title of an existing event."""
-    data = request.get_json()
+    data = request.get_json(silent=True)
 
     # Find the event by ID.
     event = next((event for event in events if event.id == event_id), None)
